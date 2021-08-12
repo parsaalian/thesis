@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'bourse_refs_api',
+    'quiz'
 ]
 
 MIDDLEWARE = [
