@@ -3,7 +3,7 @@ import json
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from django.core.management.base import BaseCommand
-from tqdm import tqdm_notebook as tqdm
+from tqdm import tqdm as tqdm
 
 
 def is_title_relevant(title, term):
@@ -72,84 +72,25 @@ def get_to_article(driver, search_term):
     return data
 
 
-pattern_names = [
-    'two crows',
-    'three black crows',
-    'three inside',
-    'three line strike',
-    'three outside',
-    'three stars in south',
-    'three white soldiers',
-    'abandoned baby',
-    'advance block',
-    'belt hold',
-    'break away',
-    'closing marubozu',
-    'conceal babyswall',
-    'counterattack',
-    'dark cloud cover',
-    'doji',
-    'doji star',
-    'dragonfly doji',
-    'engulfing',
-    'evening doji star',
-    'evening star',
-    'gap side side white',
-    'gravestone doji',
-    'hammer',
-    'hanging man',
-    'harami',
-    'harami cross',
-    'high wave',
-    'hikkake',
-    'hikkake modified',
-    'identical three crows',
-    'in neck',
-    'inside',
-    'inverted hammer',
-    'kicking',
-    'kicking by length',
-    'ladder bottom',
-    'long legged doji',
-    'long line',
-    'marubozu',
-    'matching glow',
-    'mat hold',
-    'morning doji star',
-    'morning star',
-    'on neck',
-    'piercing',
-    'rickshaw man',
-    'rising three methods',
-    'falling three methods',
-    'separating lines',
-    'shooting star',
-    'short line',
-    'spinning top',
-    'stalled pattern',
-    'stick sandwich',
-    'takuri',
-    'tasuki gap',
-    'thrusting',
-    'tri star',
-    'unique three river',
-    'upside gap two crows',
-    'x side gap three methods'
-]
-
-
 class Command(BaseCommand):
     help = 'Crawls Investopedia education pages'
     
     
     def add_arguments(self, parser):
-        parser.add_argument('save_loc', type=str, nargs='+', help='location to save crawled data json')
+        parser.add_argument('--crawl_list', type=str, help='list of items to crawl from Investopedia')
+        parser.add_argument('--driver', type=str, help='location of chromedriver')
+        parser.add_argument('--save', type=str, help='location to save crawled data json')
+        parser.add_argument('--retry', type=int, help='maximum number of retries if a page returns error')
     
     
     def handle(self, *args, **kwargs):
+        pattern_names = []
+        with open(kwargs.get('crawl_list'), 'r') as f:
+            pattern_names = json.load(f)
+        
         chrome_options = Options()
         chrome_options.add_argument("--incognito")
-        driver = webdriver.Chrome(options=chrome_options, executable_path='./chromedriver')
+        driver = webdriver.Chrome(options=chrome_options, executable_path=kwargs.get('driver'))
         
         driver.get('https://investopedia.com')
         driver.find_element_by_id('onetrust-accept-btn-handler').click()
@@ -158,7 +99,7 @@ class Command(BaseCommand):
 
         for pattern in tqdm(pattern_names):
             # attempt 5 times
-            for i in range(5):
+            for i in range(kwargs.get('retry')):
                 try:
                     pattern_data = get_to_article(driver, pattern + ' pattern')
                     data[pattern] = pattern_data
@@ -167,5 +108,5 @@ class Command(BaseCommand):
                     print(e)
                     print('pattern not found:', pattern)
         
-        with open(kwargs['save_loc'], 'w+') as f:
+        with open(kwargs.get('save'), 'w+') as f:
             json.dump(data, f)
