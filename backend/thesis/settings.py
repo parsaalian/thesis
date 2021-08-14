@@ -93,6 +93,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD_WEB'),
         'HOST': os.getenv('DB_HOST_ADDRESS'),
         'PORT': os.getenv('DB_HOST_PORT'),
+        'CONN_MAX_AGE': None
     }
 }
 

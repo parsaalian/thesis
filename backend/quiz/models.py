@@ -22,6 +22,11 @@ class HistoricalPatternActionPoint(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
     pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE)
     date = models.DateField()
+    value = models.IntegerField(default=0)
     
     class Meta:
         unique_together = ('stock', 'pattern', 'date',)
+
+
+class Question(models.Model):
+    pass
