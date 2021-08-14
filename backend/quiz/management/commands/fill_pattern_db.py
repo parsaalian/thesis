@@ -75,12 +75,12 @@ class Command(BaseCommand):
     
     
     def add_arguments(self, parser):
-        parser.add_argument('crawled_data', type=str, nargs='+', help='location of crawled data json')
+        parser.add_argument('--crawled_data', type=str, help='location of crawled data json')
     
     
     def handle(self, *args, **kwargs):
         pattern_data = {}
-        with open(kwargs['crawled_data'], 'r') as f:
+        with open(kwargs.get('crawled_data'), 'r') as f:
             pattern_data = json.load(f)
         
         for value in list(pattern_names_mapping.values()):
