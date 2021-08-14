@@ -19,13 +19,13 @@ class PatternReference(models.Model):
 
 
 class HistoricalPatternActionPoint(models.Model):
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
     pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE)
+    stock_id = models.BigIntegerField(default=0)
     date = models.DateField()
     value = models.IntegerField(default=0)
     
     class Meta:
-        unique_together = ('stock', 'pattern', 'date',)
+        unique_together = ('pattern', 'stock_id', 'date',)
 
 
 class Question(models.Model):
