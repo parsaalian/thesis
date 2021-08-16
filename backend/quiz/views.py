@@ -22,8 +22,8 @@ class GenerateQuestion(GenericAPIView):
         pattern_article = PatternArticle.objects.filter(pattern=action_point.pattern)
         pattern_article_data = PatternArticleSerializer(pattern_article, many=True).data
         
-        history_start_date = action_point.date - relativedelta(days=14)
-        history_end_date = action_point.date + relativedelta(days=14)
+        history_start_date = action_point.date - relativedelta(days=30)
+        history_end_date = action_point.date + relativedelta(days=5)
         history = StockHistory.objects.filter(
             stock_id=action_point.stock_id,
             date__gte=history_start_date,
