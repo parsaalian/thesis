@@ -15,7 +15,9 @@ class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
         print('downloading stock history data...')
-        df = pd.DataFrame(StockHistory.objects.all().values())
+        queryset = list(StockHistory.objects.all().values())
+        df = pd.DataFrame(queryset)
+        df.stock_id = list(map(lambda x: str(x['stock_id']), queryset))
         df = df.sort_values('date').reset_index(drop=True)
         df = dropna(df)
         df = df.sort_values(['stock_id', 'date'])
@@ -45,7 +47,7 @@ class Command(BaseCommand):
             ]]
             entries = list(map(
                 lambda row: HistoricalPatternActionPoint(
-                    stock_id=row[0],
+                    stock_id=int(row[0]),
                     pattern=pattern,
                     date=row[1],
                     value=row[2]
