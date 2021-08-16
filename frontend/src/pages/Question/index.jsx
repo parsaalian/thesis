@@ -31,6 +31,8 @@ class QuestionPage extends Component {
     }
 
     render() {
+        return <div>hello</div>;
+        
         console.log(this.state.candlestickSeries);
         if (this.state.candlestickSeries.length === 0) {
             return <></>;
