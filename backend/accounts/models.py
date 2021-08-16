@@ -1,3 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
+from quiz.models import Pattern
 
-# Create your models here.
+
+class LeitnerBox(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE)
+    box_number = models.IntegerField()
