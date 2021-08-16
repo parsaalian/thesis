@@ -2,7 +2,7 @@ import axios from 'axios';
 import BASE_ADDR from '.';
 
 const QUESTION_PRACTICE = `${BASE_ADDR}/question/practice`;
-const QUESTION_QUIZ = `${BASE_ADDR}/question/quiz`;
+const QUESTION_QUIZ = `${BASE_ADDR}/quiz/question`;
 
 export function getPracticeQuestionAPI() {
     return axios.get(QUESTION_PRACTICE);
