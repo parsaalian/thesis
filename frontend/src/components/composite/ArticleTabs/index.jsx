@@ -6,7 +6,7 @@ import Markdown from '../../simple/Markdown';
 
 function ArticleTabs({ articles }) {
     return (
-        <Tabs defaultActiveKey={articles[0].href} className="mb-3">
+        <Tabs defaultActiveKey={articles[0].href} className="my-3">
             {articles.map(article => (
                 <Tab key={article.href} eventKey={article.href} title={article.title}>
                     <span>

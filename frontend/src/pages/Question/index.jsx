@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MDX from '@mdx-js/runtime'
+import QuestionLayout from '../../components/composite/QuestionLayout';
 import Chart from '../../containers/TradingViewChart';
 import ArticleTabs from '../../components/composite/ArticleTabs';
 import { getQuizQuestionAPI } from '../../services/question';
@@ -49,7 +49,7 @@ class QuestionPage extends Component {
             return <></>
         }
         return (
-            <>
+            <QuestionLayout>
                 <Chart
                     options={{
                         alignLabels: true,
@@ -75,7 +75,7 @@ class QuestionPage extends Component {
                     articles.length > 0 && <ArticleTabs articles={articles} />
                 }
                 
-            </>
+            </QuestionLayout>
         );
     }
 }
