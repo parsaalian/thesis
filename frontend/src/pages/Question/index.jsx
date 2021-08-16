@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MDX from '@mdx-js/runtime'
 import Chart from '../../containers/TradingViewChart';
+import ArticleTabs from '../../components/composite/ArticleTabs';
 import { getQuizQuestionAPI } from '../../services/question';
 
 
@@ -24,7 +25,7 @@ class QuestionPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            article: {},
+            articles: {},
             candlestickSeries: [],
         }
     }
@@ -37,13 +38,13 @@ class QuestionPage extends Component {
                 candlestickSeries: [{
                     data: candlestick
                 }],
-                article: res.data.articles[0],
+                articles: res.data.articles,
             })
         });
     }
 
     render() {
-        const { article, candlestickSeries } = this.state;
+        const { articles, candlestickSeries } = this.state;
         if (candlestickSeries.length === 0) {
             return <></>
         }
@@ -71,12 +72,7 @@ class QuestionPage extends Component {
                     height={640}
                 />
                 {
-                    article !== undefined  && (
-                        <>
-                            <a href={article.href} target="_blank" rel="noreferrer">{article.title}</a>
-                            <MDX components={components} children={article.body} />
-                        </>
-                    )
+                    articles.length > 0 && <ArticleTabs articles={articles} />
                 }
                 
             </>
