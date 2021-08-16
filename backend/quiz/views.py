@@ -1,4 +1,3 @@
-import random
 from dateutil.relativedelta import relativedelta
 
 from rest_framework.response import Response
@@ -6,7 +5,8 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView
 # from rest_framework.permissions import IsAuthenticated
 
-from .models import PatternArticle, HistoricalPatternActionPoint
+from .utils import get_random_action_point
+from .models import PatternArticle
 from .serializers import PatternArticleSerializer, HistoricalPatternActionPointSerializer
 from bourse_refs_api.models import StockHistory
 from bourse_refs_api.serializers import StockHistorySerializer
@@ -16,7 +16,7 @@ class GenerateQuestion(GenericAPIView):
     # permission_classes = [IsAuthenticated]
     
     def get(self, request):
-        action_point = random.choice(HistoricalPatternActionPoint.objects.all())
+        action_point = get_random_action_point()
         action_point_data = HistoricalPatternActionPointSerializer(action_point).data
         
         pattern_article = PatternArticle.objects.filter(pattern=action_point.pattern)
