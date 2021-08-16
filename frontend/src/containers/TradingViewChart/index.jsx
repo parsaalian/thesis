@@ -170,6 +170,8 @@ class TradingViewChart extends Component {
         chart.applyOptions(options);
 
         this.handleSeries();
+
+        this.chart.timeScale().fitContent();
     };
 
     render() {

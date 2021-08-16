@@ -1,5 +1,5 @@
 import React from 'react';
-import Chart from './TradingViewChart';
+import Chart from './index';
 
 export default {
     title: 'Chart',
@@ -12,13 +12,15 @@ const options = {
         rightOffset: 12,
         barSpacing: 3,
         fixLeftEdge: true,
+        fixRightEdge: true,
         lockVisibleTimeRangeOnResize: true,
         rightBarStaysOnScroll: true,
         borderVisible: false,
         borderColor: "#fff000",
         visible: true,
         timeVisible: true,
-        secondsVisible: false
+        secondsVisible: false,
+        autoScale: true,
     }
 };
 
