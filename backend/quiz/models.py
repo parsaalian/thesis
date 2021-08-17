@@ -28,6 +28,33 @@ class HistoricalPatternActionPoint(models.Model):
         unique_together = ('pattern', 'stock_id', 'date',)
 
 
+class PatternStatistics(models.Model):
+    pattern = models.ForeignKey('Pattern', on_delete=models.CASCADE)
+    value = models.IntegerField()
+    count = models.IntegerField()
+    
+    change_mean = models.FloatField()
+    change_std = models.FloatField()
+    change_min = models.FloatField()
+    change_25 = models.FloatField()
+    change_50 = models.FloatField()
+    change_75 = models.FloatField()
+    change_max = models.FloatField()
+    
+    time_mean = models.IntegerField()
+    time_std = models.IntegerField()
+    time_min = models.IntegerField()
+    time_25 = models.IntegerField()
+    time_50 = models.IntegerField()
+    time_75 = models.IntegerField()
+    time_max = models.IntegerField()
+    
+    positive_rate = models.FloatField()
+    
+    class Meta:
+        unique_together = ('pattern', 'value',)
+
+
 class Question(models.Model):
     pass
 

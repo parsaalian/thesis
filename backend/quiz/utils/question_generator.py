@@ -1,5 +1,12 @@
 import numpy as np
-from ..models import Pattern
+from random import choice
+from ..models import Pattern, HistoricalPatternActionPoint
+
+
+def get_random_action_point():
+    pattern = choice(Pattern.objects.all())
+    action_point = choice(HistoricalPatternActionPoint.objects.filter(pattern=pattern))
+    return action_point
 
 
 def identify_question(pattern, wrong_choices_count):
