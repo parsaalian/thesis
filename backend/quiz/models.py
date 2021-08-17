@@ -1,5 +1,5 @@
+from django.contrib.auth.models import User
 from django.db import models
-from bourse_refs_api.models import Stock
 
 
 class Pattern(models.Model):
@@ -30,3 +30,9 @@ class HistoricalPatternActionPoint(models.Model):
 
 class Question(models.Model):
     pass
+
+
+class LeitnerBox(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE)
+    box_number = models.IntegerField()
