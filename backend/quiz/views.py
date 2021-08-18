@@ -3,7 +3,7 @@ from dateutil.relativedelta import relativedelta
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 
 from .utils import get_random_action_point
 from .models import PatternArticle
@@ -13,9 +13,9 @@ from bourse_refs_api.serializers import StockHistorySerializer
 
 
 class GenerateQuestion(GenericAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
-    def get(self, request):
+    def get(self, request):        
         action_point = get_random_action_point()
         action_point_data = HistoricalPatternActionPointSerializer(action_point).data
         

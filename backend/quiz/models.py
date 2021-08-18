@@ -63,3 +63,6 @@ class LeitnerBox(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pattern = models.ForeignKey(Pattern, on_delete=models.CASCADE)
     box_number = models.IntegerField()
+    
+    class Meta:
+        unique_together = ('user', 'pattern', 'box_number',)
