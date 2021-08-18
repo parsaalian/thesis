@@ -60,6 +60,14 @@ class PracticeQuestion(GenericAPIView):
         ).data
         
         question = random_question_type(action_point, history)
-        question['history'] = history_data
         
-        return Response(question, status=status.HTTP_200_OK)
+        pattern_article = PatternArticle.objects.filter(pattern=action_point.pattern)
+        pattern_article_data = PatternArticleSerializer(pattern_article, many=True).data
+        
+        data = {
+            'history': history_data,
+            'question': question,
+            'articles': pattern_article_data
+        }
+        
+        return Response(data, status=status.HTTP_200_OK)

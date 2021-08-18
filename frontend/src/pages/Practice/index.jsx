@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QuestionLayout from '../../components/composite/QuestionLayout';
 import Question from '../../components/composite/Question';
+import ArticleTabs from '../../components/composite/ArticleTabs';
 import Chart, { defaultOptions } from '../../containers/TradingViewChart';
 import { historyToCandlestick } from '../../utils/question';
 import { getPracticeQuestionAPI } from '../../services/question';
@@ -11,28 +12,37 @@ class PracticePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            question: {}
+            practice: {},
+            showArticles: false,
         }
+        this.answerQuestion = this.answerQuestion.bind(this);
     }
 
     componentDidMount() {
         const { access } = this.props;
         getPracticeQuestionAPI(access).then(
             (response) => {
-                const { data: question } = response;
+                const { data: practice } = response;
                 this.setState({
-                    question
+                    practice
                 });
             }
         );
     }
 
+    answerQuestion(choice) {
+        // submitAnswerToServer(choice)
+        this.setState({
+            showArticles: true,
+        });
+    }
+
     render() {
-        const { question } = this.state;
-        if (isEmpty(question)) {
+        const { practice, showArticles } = this.state;
+        if (isEmpty(practice)) {
             return <></>;
         }
-        const { history } = question;
+        const { history, question, articles } = practice;
         const candlestickSeries = historyToCandlestick(history);
         return (
             <QuestionLayout>
@@ -41,7 +51,10 @@ class PracticePage extends Component {
                     candlestickSeries={candlestickSeries}
                     height={640}
                 />
-                <Question question={question} />
+                <Question question={question} onAnswer={this.answerQuestion} />
+                {
+                    showArticles && articles.length > 0 && <ArticleTabs articles={articles} />
+                }
             </QuestionLayout>
         );
     }

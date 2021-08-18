@@ -5,13 +5,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Choice from '../../components/simple/Choice';
 
-function QuestionChoices({ choices, answer, onChoice }) {
+function QuestionChoices({ choices, answer, onAnswer }) {
     const [clicked, setClicked] = useState(null);
 
     const onChoiceClick = (choice) => {
         if (isNull(clicked)) {
             setClicked(choice);
-            // onChoice(choice);
+            onAnswer(choice);
         }
     }
 
