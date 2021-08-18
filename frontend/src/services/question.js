@@ -6,7 +6,9 @@ const QUESTION_QUIZ = `${BASE_ADDR}/quiz/question`;
 
 export function getPracticeQuestionAPI(token) {
     return axios.get(QUESTION_PRACTICE, {
-        Authentication: `Bearer ${token}`,
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
     });
 }
 

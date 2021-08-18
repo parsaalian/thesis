@@ -181,4 +181,6 @@ class TradingViewChart extends Component {
     }
 }
 
+export const defaultOptions = require('./defaultOptions').default;
+
 export default TradingViewChart;
