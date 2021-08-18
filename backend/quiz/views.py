@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from .utils import get_random_action_point
+from .utils import get_random_action_point, choose_pattern_leitner, random_question_type
 from .models import PatternArticle
 from .serializers import PatternArticleSerializer, HistoricalPatternActionPointSerializer
 from bourse_refs_api.models import StockHistory
@@ -38,3 +38,28 @@ class GenerateQuestion(GenericAPIView):
         }
         
         return Response(data, status=status.HTTP_200_OK)
+
+
+class PracticeQuestion(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        user = request.user
+        
+        selected_pattern = choose_pattern_leitner(user)
+        action_point = get_random_action_point(selected_pattern)
+        
+        history = StockHistory.objects.filter(
+            stock_id=action_point.stock_id,
+            date__gte=action_point.date - relativedelta(days=30),
+            date__lte=action_point.date + relativedelta(days=60)
+        )
+        history_data = StockHistorySerializer(
+            history.filter(date__lte=action_point.date + relativedelta(days=2)),
+            many=True
+        ).data
+        
+        question = random_question_type(action_point, history)
+        question['history'] = history_data
+        
+        return Response(question, status=status.HTTP_200_OK)

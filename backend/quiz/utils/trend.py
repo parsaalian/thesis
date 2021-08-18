@@ -14,6 +14,8 @@ def trend(history, pivot, ma=14):
         sma[(sma.shift(1) > sma) & (sma.shift(-1) > sma)]]
     )
     
+    suprimums = suprimums[suprimums.index >= pivot.date]
+    
     if len(suprimums) > 0:
         suprimum_date = suprimums.index[0] - relativedelta(days=ma//2)
     else:
