@@ -2,8 +2,9 @@ import { isEmpty } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QuestionLayout from '../../components/composite/QuestionLayout';
-import { historyToCandlestick } from '../../utils/question';
+import Question from '../../components/composite/Question';
 import Chart, { defaultOptions } from '../../containers/TradingViewChart';
+import { historyToCandlestick } from '../../utils/question';
 import { getPracticeQuestionAPI } from '../../services/question';
 
 class PracticePage extends Component {
@@ -33,7 +34,6 @@ class PracticePage extends Component {
         }
         const { history } = question;
         const candlestickSeries = historyToCandlestick(history);
-        console.log(question);
         return (
             <QuestionLayout>
                 <Chart
@@ -41,6 +41,7 @@ class PracticePage extends Component {
                     candlestickSeries={candlestickSeries}
                     height={640}
                 />
+                <Question question={question} />
             </QuestionLayout>
         );
     }
