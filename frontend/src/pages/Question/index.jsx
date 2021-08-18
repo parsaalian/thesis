@@ -16,11 +16,6 @@ function quizResponseToCandlestick(response) {
 }
 
 
-const components = {
-    img: (props) => <img width="100%" {...props} />
-}
-
-
 class QuestionPage extends Component {
     constructor(props) {
         super(props);
