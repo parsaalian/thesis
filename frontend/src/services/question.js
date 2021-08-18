@@ -1,13 +1,15 @@
 import axios from 'axios';
 import BASE_ADDR from '.';
 
-const QUESTION_PRACTICE = `${BASE_ADDR}/question/practice`;
+const QUESTION_PRACTICE = `${BASE_ADDR}/quiz/practice`;
 const QUESTION_QUIZ = `${BASE_ADDR}/quiz/question`;
 
-export function getPracticeQuestionAPI() {
-    return axios.get(QUESTION_PRACTICE);
+export function getPracticeQuestionAPI(token) {
+    return axios.get(QUESTION_PRACTICE, {
+        Authentication: `Bearer ${token}`,
+    });
 }
 
-export function getQuizQuestionAPI() {
+export function getQuizQuestionAPI(token) {
     return axios.get(QUESTION_QUIZ);
 }
