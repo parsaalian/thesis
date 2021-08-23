@@ -12,7 +12,7 @@ function DashboardSideNav({ links, selected }) {
                 {links.map((link) => {
                     return (
                         <DashboardSideNavLink key={link.key} eventKey={link.key} href={link.href}>
-                            <FontAwesomeIcon icon={link.icon} /> &nbsp;&nbsp;&nbsp; {link.text}
+                            <FontAwesomeIcon icon={link.icon} fixedWidth /> &nbsp;&nbsp;&nbsp; {link.text}
                         </DashboardSideNavLink>
                     )
                 })}

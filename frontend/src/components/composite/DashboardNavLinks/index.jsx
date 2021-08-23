@@ -1,5 +1,5 @@
 import DashboardSideNav from '../../../components/composite/DashbordSideNav';
-import { faHome, faUniversity } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faHome, faUniversity, faDiceFive, faTrophy } from '@fortawesome/free-solid-svg-icons';
 
 const links = [
     {
@@ -13,6 +13,24 @@ const links = [
         text: 'Courses',
         icon: faUniversity,
         key: 'Courses'
+    },
+    {
+        href: 'dashboard/games',
+        text: 'Games',
+        icon: faDiceFive,
+        key: 'Games'
+    },
+    {
+        href: 'dashboard/bookmarks',
+        text: 'Bookmarks',
+        icon: faBookmark,
+        key: 'Bookmarks'
+    },
+    {
+        href: 'dashboard/leaderboard',
+        text: 'Leaderboard',
+        icon: faTrophy,
+        key: 'Leaderboard'
     }
 ]
 
