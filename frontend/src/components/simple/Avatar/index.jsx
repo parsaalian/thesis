@@ -3,7 +3,7 @@ import Avatar, { genConfig } from 'react-nice-avatar'
 
 const randomElement = (array) => array[Math.floor(Math.random() * array.length)];
 
-function AvatarGenerator() {
+function AvatarGenerator({ size }) {
     const config = genConfig({
         sex: randomElement(['man', 'woman']),
         earSize: randomElement(['small', 'big']),
@@ -21,7 +21,7 @@ function AvatarGenerator() {
 
     console.log(config);
 
-    return <Avatar style={{ width: '8rem', height: '8rem' }} {...config} />
+    return <Avatar style={{ width: size, height: size }} {...config} />
 }
 
 export default AvatarGenerator;

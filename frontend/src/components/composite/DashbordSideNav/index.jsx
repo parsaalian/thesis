@@ -11,7 +11,7 @@ function DashboardSideNav({ links, selected }) {
             <Nav defaultActiveKey={selected} variant="pills" className="flex-column">
                 {links.map((link) => {
                     return (
-                        <DashboardSideNavLink key={link.href} eventKey={link.href} href={link.href}>
+                        <DashboardSideNavLink key={link.key} eventKey={link.key} href={link.href}>
                             <FontAwesomeIcon icon={link.icon} /> &nbsp;&nbsp;&nbsp; {link.text}
                         </DashboardSideNavLink>
                     )

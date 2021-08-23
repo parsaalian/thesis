@@ -1,16 +1,18 @@
-import DashboardSideNav from '../../components/composite/DashbordSideNav';
+import DashboardSideNav from '../../../components/composite/DashbordSideNav';
 import { faHome, faUniversity } from '@fortawesome/free-solid-svg-icons';
 
 const links = [
     {
         href: 'dashboard',
         text: 'Home',
-        icon: faHome
+        icon: faHome,
+        key: 'Home'
     },
     {
         href: 'dashboard/courses',
         text: 'Courses',
         icon: faUniversity,
+        key: 'Courses'
     }
 ]
 
