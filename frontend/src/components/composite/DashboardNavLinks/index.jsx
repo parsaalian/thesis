@@ -5,31 +5,31 @@ import {
 
 const links = [
     {
-        href: 'dashboard',
+        href: '/dashboard',
         text: 'Home',
         icon: faHome,
         key: 'Home'
     },
     {
-        href: 'dashboard/courses',
+        href: '/dashboard/courses',
         text: 'Courses',
         icon: faUniversity,
         key: 'Courses'
     },
     {
-        href: 'dashboard/games',
+        href: '/dashboard/games',
         text: 'Games',
         icon: faDiceFive,
         key: 'Games'
     },
     {
-        href: 'dashboard/bookmarks',
+        href: '/dashboard/bookmarks',
         text: 'Bookmarks',
         icon: faBookmark,
         key: 'Bookmarks'
     },
     {
-        href: 'dashboard/leaderboard',
+        href: '/dashboard/leaderboard',
         text: 'Leaderboard',
         icon: faTrophy,
         key: 'Leaderboard'
